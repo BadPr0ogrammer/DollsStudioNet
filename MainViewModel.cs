@@ -176,6 +176,8 @@ namespace DollsStudioNet
             c.Reset();
             c.FarPlaneDistance = 5000;
             c.NearPlaneDistance = 0.1f;
+            
+            FocusCameraToScene();
         }
 
         [RelayCommand]
