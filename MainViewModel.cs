@@ -16,10 +16,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interop;
 using ObservableObject = CommunityToolkit.Mvvm.ComponentModel.ObservableObject;
 using Point3D = System.Windows.Media.Media3D.Point3D;
 
@@ -365,6 +367,20 @@ namespace DollsStudioNet
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
+        [RelayCommand]
+        private void CloseScene()
+        {
+            GroupModel.Clear();
+            scene = null;
+        }
+
+        [RelayCommand]
+        private void About()
+        {
+            MessageBox.Show("Helix Toolkit 3D Assimp(FBX,GLB etc.) file viewer.\nPlease, send bug report to:\nBadPr0ogrammer@gmail.com", "Dolls Studio", 
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
         public void StartAnimation()
         {
             initTimeStamp = Stopwatch.GetTimestamp();
@@ -483,7 +499,6 @@ namespace DollsStudioNet
             }
         }
 
-
         public const string Orthographic = "Orthographic Camera";
 
         public const string Perspective = "Perspective Camera";
@@ -547,6 +562,7 @@ namespace DollsStudioNet
                 : value is OrthographicCamera ? Orthographic
                 : string.Empty;
         }
+
         /* b
         partial void DisposeManaged()
         {

@@ -10,13 +10,20 @@
 	<StartupObject>DollsStudioNet.App</StartupObject>
 </PropertyGroup>
 <ItemGroup>
+  <None Remove="icons\cancel1.png" />
   <None Remove="icons\envmap.png" />
   <None Remove="icons\flat.png" />
+  <None Remove="icons\info.png" />
   <None Remove="icons\open2.png" />
   <None Remove="icons\play1.png" />
+  <None Remove="icons\settings2.png" />
   <None Remove="icons\ssao.png" />
   <None Remove="icons\view_all1.png" />
   <None Remove="icons\wireframe.png" />
+  <None Remove="icons\y_up_x_left.png" />
+  <None Remove="icons\y_up_x_right.png" />
+  <None Remove="icons\z_up_x_left.png" />
+  <None Remove="icons\z_up_y_left.png" />
 </ItemGroup>
 <ItemGroup>
   <Content Include="icons\logo.ico" />
@@ -68,12 +75,19 @@
   </Reference>
 </ItemGroup>
 <ItemGroup>
+  <Resource Include="icons\cancel1.png" />
   <Resource Include="icons\envmap.png" />
   <Resource Include="icons\flat.png" />
+  <Resource Include="icons\info.png" />
   <Resource Include="icons\open2.png" />
   <Resource Include="icons\play1.png" />
+  <Resource Include="icons\settings2.png" />
   <Resource Include="icons\ssao.png" />
   <Resource Include="icons\view_all1.png" />
   <Resource Include="icons\wireframe.png" />
+  <Resource Include="icons\y_up_x_left.png" />
+  <Resource Include="icons\y_up_x_right.png" />
+  <Resource Include="icons\z_up_x_left.png" />
+  <Resource Include="icons\z_up_y_left.png" />
 </ItemGroup>
 </Project>

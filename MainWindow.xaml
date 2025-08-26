@@ -18,6 +18,7 @@
             <RowDefinition Height="32" />
             <RowDefinition Height="32" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="6" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -62,79 +63,84 @@
             <hx:Element3DPresenter Content="{Binding GroupModel}" />
             <hx:PostEffectMeshBorderHighlight EffectName="highlight" />
         </hx:Viewport3DX>
-        <Grid Grid.Row="1"
-              Background="#7B363636"
-              Visibility="{Binding IsLoading, Converter={StaticResource boolToVisibilityConverter}}">
-            <StackPanel HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Orientation="Vertical">
-                <TextBlock Foreground="White">Loading Model</TextBlock>
-                <ProgressBar Grid.Row="1"
-                             Width="200"
-                             Height="30"
-                             IsIndeterminate="True" />
-            </StackPanel>
-        </Grid>
-        <Menu Grid.Row="0" 
-              Grid.ColumnSpan="2"
+        <Menu Grid.ColumnSpan="2"
               Height="20"
               VerticalAlignment="Top">
             <MenuItem Header="File">
-                <MenuItem Command="{Binding OpenFileCommand}"
-                          Header="Open File" />
-                <MenuItem Command="{Binding ExportCommand}"
-                          Header="Export" />
+                <MenuItem Command="{Binding OpenFileCommand}" Header="Open File" />
+                <MenuItem Command="{Binding ExportCommand}" Header="Export" />
             </MenuItem>
             <MenuItem Header="Edit">
-                <MenuItem Command="{Binding CopyAsBitmapCommand}"
-                          Header="Copy As Bitmap (Window Size)" />
-                <MenuItem Command="{Binding CopyAsHiresBitmapCommand}"
-                          Header="Copy as Hiresolution Bitmap (1920x1080)" />
+                <MenuItem Command="{Binding CopyAsBitmapCommand}" Header="Copy As Bitmap (Window Size)" />
+                <MenuItem Command="{Binding CopyAsHiresBitmapCommand}" Header="Copy as Hiresolution Bitmap (1920x1080)" />
             </MenuItem>
         </Menu>
-
-        <ToolBar Grid.Row="1"
-                Height="32"
-                VerticalAlignment="Top">
-            <Button ToolTip="Open" Command="{Binding OpenFileCommand}">
-                <Image Source="pack://application:,,,/icons/open2.png" />
-            </Button>
-            <Button ToolTip="Play animation" Command="{Binding PlayCommand}">
-                <Image Source="pack://application:,,,/icons/play1.png" />
-            </Button>
-            <ComboBox Width="100" DisplayMemberPath="Name"
-                IsEnabled="{Binding ElementName=aniCheckbox, Path=IsChecked}"
-                ItemsSource="{Binding Animations}"
-                SelectedItem="{Binding SelectedAnimation}" />
-            <Label Content="Speed:"  />
-            <TextBlock VerticalAlignment="Center" Text="{Binding Speed}" />
-            <Slider VerticalAlignment="Bottom" Width="100" 
-                Maximum="10"
-                Minimum="0.05"
-                SmallChange="0.1"
-                Value="{Binding Speed}" />
-            <Label>
-                <TextBlock>
+        <DockPanel Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Top">
+            <ToolBar>
+                <Button ToolTip="Open" Command="{Binding OpenFileCommand}">
+                    <Image Source="pack://application:,,,/icons/open2.png" />
+                </Button>
+                <Button ToolTip="Play animation" Command="{Binding PlayCommand}">
+                    <Image Source="pack://application:,,,/icons/play1.png" />
+                </Button>
+                <ComboBox Width="100" DisplayMemberPath="Name"
+                    IsEnabled="{Binding ElementName=aniCheckbox, Path=IsChecked}"
+                    ItemsSource="{Binding Animations}"
+                    SelectedItem="{Binding SelectedAnimation}" />
+                <Label Content="Speed:"  />
+                <TextBlock VerticalAlignment="Center" Text="{Binding Speed}" />
+                <Slider VerticalAlignment="Bottom" Width="100" 
+                    Maximum="10"
+                    Minimum="0.05"
+                    SmallChange="0.1"
+                    Value="{Binding Speed}" />
+                <Label>
+                    <TextBlock>
                     <Run>Time:</Run>
                     <Run Text="{Binding CurrAnimationTime}" />
-                </TextBlock>
-            </Label>
-            <ToggleButton Margin="20,0,0,0" IsChecked="{Binding ShowWireframe}" ToolTip="Surface/Wireframe" >
-                <Image Source="pack://application:,,,/icons/wireframe.png" />
-            </ToggleButton>
-            <ToggleButton IsChecked="{Binding RenderFlat}" ToolTip="Flat Shading">
-                <Image Source="pack://application:,,,/icons/flat.png" />
-            </ToggleButton>
-            <ToggleButton IsChecked="{Binding ElementName=view, Path=EnableSSAO}" ToolTip="Enable SSAO">
-                <Image Source="pack://application:,,,/icons/ssao.png" />
-            </ToggleButton>
-            <ToggleButton IsChecked="{Binding RenderEnvironmentMap}" ToolTip="Render EnvironmentMap">
-                <Image Source="pack://application:,,,/icons/envmap.png" />
-            </ToggleButton>
-            <Button Command="{Binding ResetCameraCommand}" ToolTip="Reset Camera">
-                <Image Source="pack://application:,,,/icons/view_all1.png" />
-            </Button>
-        </ToolBar>
+                    </TextBlock>
+                </Label>
+            </ToolBar>
+            <ToolBar>
+                <ToggleButton IsChecked="{Binding ShowWireframe}" ToolTip="Surface/Wireframe">
+                    <Image Source="pack://application:,,,/icons/wireframe.png" />
+                </ToggleButton>
+                <ToggleButton IsChecked="{Binding RenderFlat}" ToolTip="Flat Shading">
+                    <Image Source="pack://application:,,,/icons/flat.png" />
+                </ToggleButton>
+                <ToggleButton IsChecked="{Binding ElementName=view, Path=EnableSSAO}" ToolTip="Enable SSAO">
+                    <Image Source="pack://application:,,,/icons/ssao.png" />
+                </ToggleButton>
+                <ToggleButton IsChecked="{Binding RenderEnvironmentMap}" ToolTip="Render EnvironmentMap">
+                    <Image Source="pack://application:,,,/icons/envmap.png" />
+                </ToggleButton>
+            </ToolBar>
+            <ToolBar>
+                <Button Command="{Binding ResetCameraCommand}" ToolTip="Reset Camera">
+                    <Image Source="pack://application:,,,/icons/view_all1.png" />
+                </Button>
+                <Button ToolTip="Front View" Command="hx:ViewportCommands.FrontView">
+                    <Image Source="pack://application:,,,/icons/y_up_x_right.png" />
+                </Button>
+                <Button ToolTip="Top View" Command="hx:ViewportCommands.TopView">
+                    <Image Source="pack://application:,,,/icons/z_up_x_left.png" />
+                </Button>
+                <Button ToolTip="Back View" Command="hx:ViewportCommands.BackView">
+                    <Image Source="pack://application:,,,/icons/y_up_x_left.png" />
+                </Button>
+            </ToolBar>
+            <ToolBar>
+                <Button ToolTip="Settings">
+                    <Image Source="pack://application:,,,/icons/settings2.png" />
+                </Button>
+                <Button ToolTip="About and Bug report email." Command="{Binding AboutCommand}">
+                    <Image Source="pack://application:,,,/icons/info.png" />
+                </Button>
+                <Button ToolTip="Close Scene" Command="{Binding CloseSceneCommand}">
+                    <Image Source="pack://application:,,,/icons/cancel1.png" />
+                </Button>
+            </ToolBar>
+        </DockPanel>
         <Slider Grid.Row="2"
                 Height="32"
                 VerticalAlignment="Top"
@@ -143,24 +149,21 @@
                 Minimum="{Binding StartTime}"
                 SmallChange="0.1"
                 Value="{Binding CurrAnimationTime}" />
-        <Grid Grid.Row="1"
-              Grid.RowSpan="3"
-              Grid.Column="1"              
-              Width="250"
-              VerticalAlignment="Stretch">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <ScrollViewer Grid.Row="1">
-                <GroupBox Header="Scene Graph">
+        <StackPanel Grid.Row="2" Grid.Column="1" Grid.RowSpan="3"
+            Width="250"
+            Margin="10,24,4,4"
+            Height="Auto"
+            VerticalAlignment="Stretch">
+            <Expander>
+                <Expander.Header>"Scene Graph"</Expander.Header>
+                <ScrollViewer>
                     <TreeView ItemsSource="{Binding GroupModel.GroupNode.Items}">
                         <TreeView.ItemContainerStyle>
                             <Style TargetType="TreeViewItem">
                                 <Setter Property="IsSelected"
-                                    Value="{Binding Tag.Selected, Mode=TwoWay}" />
+                                Value="{Binding Tag.Selected, Mode=TwoWay}" />
                                 <Setter Property="IsExpanded"
-                                    Value="{Binding Tag.Expanded, Mode=TwoWay}" />
+                                Value="{Binding Tag.Expanded, Mode=TwoWay}" />
                             </Style>
                         </TreeView.ItemContainerStyle>
                         <TreeView.ItemTemplate>
@@ -170,13 +173,13 @@
                                         <Style TargetType="TextBlock">
                                             <Style.Setters>
                                                 <Setter Property="Foreground"
-                                                    Value="Black" />
+                                                Value="Black" />
                                             </Style.Setters>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding IsAnimationNode}"
-                                                         Value="true">
+                                                     Value="true">
                                                     <Setter Property="Foreground"
-                                                        Value="Blue" />
+                                                    Value="Blue" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
@@ -185,8 +188,28 @@
                             </HierarchicalDataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>
-                </GroupBox>
-            </ScrollViewer>
+                </ScrollViewer>
+            </Expander>
+            <Expander>
+                <Expander.Header>"123"</Expander.Header>
+                <ScrollViewer>
+                    <StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </Expander>
+        </StackPanel>
+        <Grid Grid.Row="4"
+              Background="#7B363636"
+              Visibility="{Binding IsLoading, Converter={StaticResource boolToVisibilityConverter}}">
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Vertical">
+                <TextBlock Foreground="White">Loading Model</TextBlock>
+                <ProgressBar Grid.Row="4"
+                             Width="200"
+                             Height="30"
+                             IsIndeterminate="True" />
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>
