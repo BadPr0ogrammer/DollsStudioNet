@@ -19,6 +19,7 @@ using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using ObservableObject = CommunityToolkit.Mvvm.ComponentModel.ObservableObject;
 using Point3D = System.Windows.Media.Media3D.Point3D;
 
@@ -183,6 +184,15 @@ namespace DollsStudioNet
         [RelayCommand]
         private void Play()
         {
+            if (SelectedAnimation == null)
+            {
+                string msg = "";
+                if (GroupModel.SceneNode.Items.Count == 0)
+                    msg = "Open Assimp 3D model file.\n";
+                msg += "Select animation in the right next ComboBox.";
+                MessageBox.Show(msg, "Dolls Studio", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
             if (!IsPlaying && SelectedAnimation != null)
             {
                 StartAnimation();
