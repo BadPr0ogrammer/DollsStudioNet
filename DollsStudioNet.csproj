@@ -1,0 +1,79 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup>
+	<TargetFramework>net8.0-windows10.0.20348.0</TargetFramework>
+	<OutputType>WinExe</OutputType>
+	<LangVersion>11.0</LangVersion>
+	<Nullable>enable</Nullable>
+	<UseWPF>true</UseWPF>
+	<IsPackable>false</IsPackable>
+	<ApplicationIcon>icons\logo.ico</ApplicationIcon>
+	<StartupObject>DollsStudioNet.App</StartupObject>
+</PropertyGroup>
+<ItemGroup>
+  <None Remove="icons\envmap.png" />
+  <None Remove="icons\flat.png" />
+  <None Remove="icons\open2.png" />
+  <None Remove="icons\play1.png" />
+  <None Remove="icons\ssao.png" />
+  <None Remove="icons\view_all1.png" />
+  <None Remove="icons\wireframe.png" />
+</ItemGroup>
+<ItemGroup>
+  <Content Include="icons\logo.ico" />
+</ItemGroup>
+<ItemGroup>
+  <PackageReference Include="CommunityToolkit.Common" Version="8.4.0" />
+  <PackageReference Include="CommunityToolkit.Diagnostics" Version="8.4.0" />
+  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+</ItemGroup>
+<ItemGroup>
+  <Reference Include="HelixToolkit">
+    <HintPath>..\helix-toolkit-develop3\Source\Examples\WPF.SharpDX\FileLoadDemo\bin\Debug\net8.0-windows\HelixToolkit.dll</HintPath>
+  </Reference>
+  <Reference Include="HelixToolkit.Geometry">
+    <HintPath>..\helix-toolkit-develop3\Source\Examples\WPF.SharpDX\FileLoadDemo\bin\Debug\net8.0-windows\HelixToolkit.Geometry.dll</HintPath>
+  </Reference>
+  <Reference Include="HelixToolkit.Maths">
+    <HintPath>..\helix-toolkit-develop3\Source\Examples\WPF.SharpDX\FileLoadDemo\bin\Debug\net8.0-windows\HelixToolkit.Maths.dll</HintPath>
+  </Reference>
+  <Reference Include="HelixToolkit.SharpDX">
+    <HintPath>..\helix-toolkit-develop3\Source\Examples\WPF.SharpDX\FileLoadDemo\bin\Debug\net8.0-windows\HelixToolkit.SharpDX.dll</HintPath>
+  </Reference>
+  <Reference Include="HelixToolkit.SharpDX.Assimp">
+    <HintPath>..\helix-toolkit-develop3\Source\Examples\WPF.SharpDX\FileLoadDemo\bin\Debug\net8.0-windows\HelixToolkit.SharpDX.Assimp.dll</HintPath>
+  </Reference>
+  <Reference Include="HelixToolkit.Wpf.SharpDX">
+    <HintPath>..\helix-toolkit-develop3\Source\Examples\WPF.SharpDX\FileLoadDemo\bin\Debug\net8.0-windows\HelixToolkit.Wpf.SharpDX.dll</HintPath>
+  </Reference>
+  <Reference Include="SharpAssimp">
+    <HintPath>..\helix-toolkit-develop3\Source\Examples\WPF.SharpDX\FileLoadDemo\bin\Debug\net8.0-windows\SharpAssimp.dll</HintPath>
+  </Reference>
+  <Reference Include="SharpDX">
+    <HintPath>..\helix-toolkit-develop3\Source\Examples\WPF.SharpDX\FileLoadDemo\bin\Debug\net8.0-windows\SharpDX.dll</HintPath>
+  </Reference>
+  <Reference Include="SharpDX.D3DCompiler">
+    <HintPath>..\helix-toolkit-develop3\Source\Examples\WPF.SharpDX\FileLoadDemo\bin\Debug\net8.0-windows\SharpDX.D3DCompiler.dll</HintPath>
+  </Reference>
+  <Reference Include="SharpDX.Direct2D1">
+    <HintPath>..\helix-toolkit-develop3\Source\Examples\WPF.SharpDX\FileLoadDemo\bin\Debug\net8.0-windows\SharpDX.Direct2D1.dll</HintPath>
+  </Reference>
+  <Reference Include="SharpDX.Direct3D11">
+    <HintPath>..\helix-toolkit-develop3\Source\Examples\WPF.SharpDX\FileLoadDemo\bin\Debug\net8.0-windows\SharpDX.Direct3D11.dll</HintPath>
+  </Reference>
+  <Reference Include="SharpDX.Direct3D9">
+    <HintPath>..\helix-toolkit-develop3\Source\Examples\WPF.SharpDX\FileLoadDemo\bin\Debug\net8.0-windows\SharpDX.Direct3D9.dll</HintPath>
+  </Reference>
+  <Reference Include="SharpDX.DXGI">
+    <HintPath>..\helix-toolkit-develop3\Source\Examples\WPF.SharpDX\FileLoadDemo\bin\Debug\net8.0-windows\SharpDX.DXGI.dll</HintPath>
+  </Reference>
+</ItemGroup>
+<ItemGroup>
+  <Resource Include="icons\envmap.png" />
+  <Resource Include="icons\flat.png" />
+  <Resource Include="icons\open2.png" />
+  <Resource Include="icons\play1.png" />
+  <Resource Include="icons\ssao.png" />
+  <Resource Include="icons\view_all1.png" />
+  <Resource Include="icons\wireframe.png" />
+</ItemGroup>
+</Project>
