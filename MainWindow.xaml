@@ -30,9 +30,10 @@
                         Camera="{Binding Camera}"
                         EffectsManager="{Binding EffectsManager}"
                         EnableSwapChainRendering="True"
-                        FXAALevel="Low"
+                        FXAALevel="Medium"
                         FixedRotationPoint="{Binding ModelCentroid}"
-                        FixedRotationPointEnabled="True">
+                        FixedRotationPointEnabled="True"                        
+                        ShowFrameRate="True">
             <hx:Viewport3DX.InputBindings>
                 <KeyBinding Key="B"
                             Command="hx:ViewportCommands.BackView" />
@@ -88,16 +89,17 @@
                     ItemsSource="{Binding Animations}"
                     SelectedItem="{Binding SelectedAnimation}" />
                 <Label Content="Speed:"  />
-                <TextBlock VerticalAlignment="Center" Text="{Binding Speed}" />
+                <TextBlock VerticalAlignment="Center" Text="{Binding Speed, 
+                    StringFormat={}{0:F2}}" FontFamily="Monospace"/>
                 <Slider VerticalAlignment="Bottom" Width="100" 
                     Maximum="10"
                     Minimum="0.05"
                     SmallChange="0.1"
                     Value="{Binding Speed}" />
                 <Label>
-                    <TextBlock>
+                    <TextBlock FontFamily="Monospace">
                     <Run>Time:</Run>
-                    <Run Text="{Binding CurrAnimationTime}" />
+                    <Run Text="{Binding CurrAnimationTime, StringFormat={}{0:F2}}" />
                     </TextBlock>
                 </Label>
             </ToolBar>
@@ -128,6 +130,9 @@
                 <Button ToolTip="Back View" Command="hx:ViewportCommands.BackView">
                     <Image Source="pack://application:,,,/icons/y_up_x_left.png" />
                 </Button>
+                <ToggleButton IsChecked="{Binding ShowSkeleton}"  ToolTip="Show Skeleton">
+                    Skeleton
+                </ToggleButton>
             </ToolBar>
             <ToolBar>
                 <Button ToolTip="Settings">

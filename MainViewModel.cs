@@ -131,7 +131,7 @@ namespace DollsStudioNet
         private HelixToolkitScene? scene;
         private IAnimationUpdater? animationUpdater;
         private List<BoneSkinMeshNode> boneSkinNodes = new();
-        private List<BoneSkinMeshNode> skeletonNodes = new();
+        private readonly List<BoneSkinMeshNode> skeletonNodes = new();
         private CompositionTargetEx compositeHelper = new();
         private long initTimeStamp = 0;
 
@@ -190,8 +190,8 @@ namespace DollsStudioNet
             {
                 string msg = "";
                 if (GroupModel.SceneNode.Items.Count == 0)
-                    msg = "Open Assimp 3D model file.\n";
-                msg += "Select animation in the right next ComboBox.";
+                    msg = "Open an Assimp 3D model file.\n";
+                msg += "Select the animation (right next ComboBox).";
                 MessageBox.Show(msg, "Dolls Studio", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
@@ -274,6 +274,11 @@ namespace DollsStudioNet
             Task.Run(() =>
             {
                 var loader = new Importer();
+
+                loader.Configuration.CreateSkeletonForBoneSkinningMesh = true;
+                loader.Configuration.SkeletonSizeScale = 0.04f;
+                loader.Configuration.GlobalScale = 0.1f;
+
                 var scene = loader.Load(path);
 
                 if (scene is null)
@@ -331,6 +336,21 @@ namespace DollsStudioNet
                                     {
                                         phong.RenderEnvironmentMap = RenderEnvironmentMap;
                                     }
+                                } 
+                                else if (node is BoneSkinMeshNode mm)
+                                {
+                                    if (!mm.IsSkeletonNode)
+                                    {
+                                        mm.IsThrowingShadow = true;
+                                        mm.WireframeColor = new Color4(0, 0, 1, 1);
+                                        boneSkinNodes.Add(mm);
+                                        /// mm.MouseDown += HandleMouseDown;
+                                    }
+                                    else
+                                    {
+                                        skeletonNodes.Add(mm);
+                                        mm.Visible = false;
+                                    }
                                 }
                             }
                         }
@@ -370,6 +390,10 @@ namespace DollsStudioNet
         [RelayCommand]
         private void CloseScene()
         {
+            Animations.Clear();
+            var oldNode = GroupModel.SceneNode.Items.ToArray();
+            foreach (var node in oldNode)
+                node.Dispose(); 
             GroupModel.Clear();
             scene = null;
         }
@@ -392,6 +416,17 @@ namespace DollsStudioNet
         {
             IsPlaying = false;
             compositeHelper.Rendering -= CompositeHelper_Rendering;
+        }
+
+        [ObservableProperty]
+        private bool showSkeleton = false;
+
+        partial void OnShowSkeletonChanged(bool value)
+        {
+            foreach (var m in skeletonNodes)
+            {
+                m.Visible = value;
+            }
         }
 
         private void CompositeHelper_Rendering(object? sender, System.Windows.Media.RenderingEventArgs e)
